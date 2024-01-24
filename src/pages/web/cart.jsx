@@ -10,7 +10,7 @@ const product = {
 
 const product1 = {
   id: 1,
-  name: "burger",
+  name: "Shawarma Wrap",
   image: "/assets/images/Shawarma.jpeg",
   price: "2500",
 };
@@ -26,7 +26,7 @@ function Cart() {
         <div className="space-y-1 text-right text-grey">
           <p>
             Total amount:
-            <span className="font-semibold ml-1 ">3500 RWF</span>
+            <span className="font-semibold ml-1 ">7000 RWF</span>
           </p>
           <p className="flex items-center justify-end gap-x-2 text-sm text-grey text-right">
             <Bike /> free delivery

@@ -1,20 +1,30 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import LoadingBar from "react-top-loading-bar";
+
+// mutation
+import { useGetProductsMutation } from "../../actions/procucts";
 
 function NavBar() {
   const location = useLocation();
   const [navToggle, SetNavToggle] = useState(false);
   const loadingBar = useRef(null);
 
-  const handleLinkClick = () => {
-    loadingBar.current.continuousStart();
+  // getting products
+  const [{ isLoading }] = useGetProductsMutation();
 
-    setTimeout(() => {
-      loadingBar.current.complete();
-    }, 2000);
+  const handleMenuandhomeClick = () => {
+    if (isLoading) {
+      loadingBar.current.continuousStart();
+    }
   };
+
+  useEffect(() => {
+    if (!isLoading) {
+      loadingBar.current.complete();
+    }
+  }, [isLoading]);
 
   return (
     <div className="h-[70px] bg-primary w-full flex items-center justify-between px-3 sm:px-10 md:px-10 text-dark font-main-sans sm:sticky top-[0]">
@@ -25,7 +35,7 @@ function NavBar() {
         title="knight meat"
         aria-current="page"
         href="#"
-        onClick={handleLinkClick}
+        onClick={handleMenuandhomeClick}
       >
         <span className="font-semibold text-sm sm:text-xl md:text-xl">
           Knight Meat Taste
@@ -49,7 +59,7 @@ function NavBar() {
           to="/"
           title="login"
           href="#"
-          onClick={handleLinkClick}
+          onClick={handleMenuandhomeClick}
         >
           Home
         </Link>
@@ -59,7 +69,7 @@ function NavBar() {
           }`}
           to="/menu"
           title="menu"
-          onClick={handleLinkClick}
+          onClick={handleMenuandhomeClick}
         >
           Menu
         </Link>
@@ -70,7 +80,6 @@ function NavBar() {
           to="/account"
           title="login"
           href="#"
-          onClick={handleLinkClick}
         >
           Login
         </Link>
@@ -80,7 +89,6 @@ function NavBar() {
           }`}
           to="/cart"
           title="cart"
-          onClick={handleLinkClick}
         >
           Cart
           <span className="ml-1 w-auto text-primary h-[15px] bg-secondary px-1 font-main-sans rounded-sm font-normal">

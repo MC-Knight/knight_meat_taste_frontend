@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function VerifyEmail() {
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState(null);
   return (
     <div className="h-[90vh] py-20 flex items-center justify-center bg-black/25 bg-menu bg-cover bg-center bg-no-repeat bg-fixed">
       <form
